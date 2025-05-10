@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "菜品列表",
+  "usingComponents": {
+    "cart-notifier": "/components/CartNotifier"
+  }
+}

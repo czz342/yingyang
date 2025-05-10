@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "营养食堂",
+  "usingComponents": {
+    "cart-notifier": "/components/CartNotifier"
+  }
+}

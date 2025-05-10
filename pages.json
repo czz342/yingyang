@@ -1,0 +1,80 @@
+{
+	"pages": [ 
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "营养食堂"
+			}
+		},
+		{
+			"path": "pages/menu/menu",
+			"style": {
+				"navigationBarTitleText": "菜品列表"
+			}
+		},
+		{
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车"
+			}
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/dish-detail/dish-detail",
+			"style": {
+				"navigationBarTitleText": "菜品详情"
+			}
+		},
+		{
+			"path": "pages/customize-combo/customize-combo",
+			"style": {
+				"navigationBarTitleText": "自定义套餐",
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "营养食堂",
+		"navigationBarBackgroundColor": "#4CAF50",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#4CAF50",
+		"backgroundColor": "#FFFFFF",
+		"borderStyle": "black",
+		"list": [
+			{
+				"pagePath": "pages/home/home",
+				"text": "首页",
+				"iconPath": "static/tab-icons/home.png",
+				"selectedIconPath": "static/tab-icons/home-active.png"
+			},
+			{
+				"pagePath": "pages/menu/menu",
+				"text": "菜品",
+				"iconPath": "static/tab-icons/menu.png",
+				"selectedIconPath": "static/tab-icons/menu-active.png"
+			},
+			{
+				"pagePath": "pages/cart/cart",
+				"text": "购物车",
+				"iconPath": "static/tab-icons/cart.png",
+				"selectedIconPath": "static/tab-icons/cart-active.png"
+			},
+			{
+				"pagePath": "pages/profile/profile",
+				"text": "我的",
+				"iconPath": "static/tab-icons/profile.png",
+				"selectedIconPath": "static/tab-icons/profile-active.png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}

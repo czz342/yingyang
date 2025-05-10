@@ -1,0 +1,320 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+.empty-cart {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 100rpx;
+}
+.empty-cart-image {
+  width: 240rpx;
+  height: 240rpx;
+  margin-bottom: 30rpx;
+}
+.empty-cart-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}
+.go-shopping-btn {
+  width: 240rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+  border-radius: 35rpx;
+}
+.cart-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 120rpx;
+}
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  background-color: #fff;
+}
+.cart-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+}
+.clear-cart {
+  font-size: 26rpx;
+  color: #999;
+}
+.cart-items {
+  margin-top: 20rpx;
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  background-color: #fff;
+  margin-bottom: 2rpx;
+}
+.item-left {
+  margin-right: 20rpx;
+}
+.checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 2rpx solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.checkbox-inner {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background-color: transparent;
+}
+.checkbox-inner.selected {
+  background-color: #4CAF50;
+}
+.item-image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.item-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+.item-tags {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+.item-nutrition {
+  margin: 8rpx 0;
+}
+.nutrition-text {
+  font-size: 22rpx;
+  color: #666;
+  margin-right: 16rpx;
+}
+.item-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+.item-price {
+  font-size: 32rpx;
+  color: #ff5000;
+  font-weight: bold;
+}
+.quantity-control {
+  display: flex;
+  align-items: center;
+}
+.quantity-btn {
+  width: 50rpx;
+  height: 50rpx;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  color: #333;
+}
+.quantity {
+  width: 60rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.select-all {
+  display: flex;
+  align-items: center;
+}
+.select-all-text {
+  font-size: 28rpx;
+  color: #333;
+  margin-left: 16rpx;
+}
+.price-info {
+  flex: 1;
+  margin-left: 40rpx;
+}
+.total-price-line {
+  display: flex;
+  align-items: baseline;
+}
+.total-label {
+  font-size: 28rpx;
+  color: #333;
+}
+.total-price {
+  font-size: 36rpx;
+  color: #ff5000;
+  font-weight: bold;
+}
+.delivery-info {
+  font-size: 22rpx;
+  color: #999;
+}
+.checkout-btn {
+  width: 200rpx;
+  height: 70rpx;
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 70rpx;
+  border-radius: 35rpx;
+}
+.checkout-btn.disabled {
+  background-color: #ccc;
+}
+
+/* Nutrition Summary Styles */
+.nutrition-summary {
+  background-color: #fff;
+  margin-top: 20rpx;
+  padding: 30rpx;
+}
+.summary-header {
+  margin-bottom: 20rpx;
+}
+.summary-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+.nutrition-bars {
+  display: flex;
+  flex-direction: column;
+}
+.nutrition-bar {
+  margin-bottom: 20rpx;
+}
+.bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+.bar-container {
+  height: 16rpx;
+  background-color: #f0f0f0;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.bar-progress {
+  height: 100%;
+  transition: width 0.3s;
+}
+.bar-warning {
+  font-size: 22rpx;
+  color: #ff5000;
+  margin-top: 6rpx;
+}
+
+/* Warning Dialog Styles */
+.warning-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.warning-content {
+  width: 80%;
+  background-color: #fff;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+.warning-header {
+  background-color: #4CAF50;
+  padding: 20rpx 30rpx;
+}
+.warning-title {
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.warning-body {
+  padding: 30rpx;
+}
+.warning-text {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+.warning-items {
+  background-color: #fff8f0;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+.warning-item {
+  font-size: 26rpx;
+  color: #ff5000;
+  margin-bottom: 10rpx;
+  display: block;
+}
+.warning-suggestion {
+  font-size: 26rpx;
+  color: #666;
+}
+.warning-actions {
+  display: flex;
+  border-top: 1rpx solid #eee;
+}
+.warning-btn {
+  flex: 1;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+.warning-btn.cancel {
+  color: #666;
+  border-right: 1rpx solid #eee;
+}
+.warning-btn.confirm {
+  color: #4CAF50;
+  font-weight: bold;
+}
+

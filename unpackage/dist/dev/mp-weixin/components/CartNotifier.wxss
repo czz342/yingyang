@@ -1,0 +1,32 @@
+
+.cart-notifier {
+  position: fixed;
+  top: 30%;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* 防止阻挡点击事件 */
+}
+.cart-notification {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 16rpx 30rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+}
+.notification-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notification-icon {
+  color: #4CAF50;
+  font-size: 36rpx;
+  margin-right: 10rpx;
+}
+.notification-text {
+  color: white;
+  font-size: 28rpx;
+}
+

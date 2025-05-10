@@ -1,0 +1,46 @@
+{
+  "name": "nutrition-canteen",
+  "version": "1.0.0",
+  "description": "营养食堂微信小程序",
+  "main": "main.js",
+  "scripts": {
+    "dev:mp-weixin": "cross-env NODE_ENV=development UNI_PLATFORM=mp-weixin vue-cli-service uni-build --watch",
+    "build:mp-weixin": "cross-env NODE_ENV=production UNI_PLATFORM=mp-weixin vue-cli-service uni-build",
+    "dev:h5": "cross-env NODE_ENV=development UNI_PLATFORM=h5 vue-cli-service uni-serve",
+    "build:h5": "cross-env NODE_ENV=production UNI_PLATFORM=h5 vue-cli-service uni-build"
+  },
+  "keywords": [
+    "uni-app",
+    "nutrition",
+    "微信小程序"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@dcloudio/uni-app": "^2.0.1",
+    "@dcloudio/uni-app-plus": "^2.0.1",
+    "@dcloudio/uni-h5": "^2.0.1",
+    "@dcloudio/uni-mp-weixin": "^2.0.1",
+    "@dcloudio/uni-stat": "^2.0.1",
+    "regenerator-runtime": "^0.13.9",
+    "vue": "^2.6.14",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@dcloudio/uni-cli-shared": "^2.0.1",
+    "@dcloudio/uni-migration": "^2.0.1",
+    "@dcloudio/uni-template-compiler": "^2.0.1",
+    "@dcloudio/vue-cli-plugin-hbuilderx": "^2.0.1",
+    "@dcloudio/vue-cli-plugin-uni": "^2.0.1",
+    "@vue/cli-plugin-babel": "^4.5.15",
+    "@vue/cli-service": "^4.5.15",
+    "cross-env": "^7.0.3",
+    "node-sass": "^7.0.1",
+    "sass-loader": "^10.2.1",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "browserslist": [
+    "Android >= 4",
+    "ios >= 8"
+  ]
+} 

@@ -1,0 +1,1 @@
+<block wx:if="{{showNotification}}"><view class="cart-notifier"><view class="cart-notification"><view class="notification-content"><text class="notification-icon">✓</text><text class="notification-text">{{notificationText}}</text></view></view></view></block>

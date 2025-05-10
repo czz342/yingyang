@@ -1,0 +1,268 @@
+
+.container {
+  padding-bottom: 30rpx;
+}
+.banner {
+  width: 100%;
+  height: 350rpx;
+}
+.banner-swiper {
+  width: 100%;
+  height: 100%;
+}
+.banner-image {
+  width: 100%;
+  height: 100%;
+}
+.section {
+  padding: 20rpx 30rpx;
+  margin-top: 20rpx;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.section-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+  padding-left: 16rpx;
+}
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6rpx;
+  height: 32rpx;
+  width: 6rpx;
+  background-color: #4CAF50;
+  border-radius: 3rpx;
+}
+.section-more {
+  font-size: 26rpx;
+  color: #666;
+}
+.dish-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+.dish-card {
+  display: inline-block;
+  width: 280rpx;
+  margin-right: 20rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+.dish-image {
+  width: 100%;
+  height: 180rpx;
+}
+.dish-info {
+  padding: 16rpx;
+}
+.dish-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dish-nutrition {
+  display: flex;
+  flex-direction: column;
+  margin: 6rpx 0;
+}
+.nutrition-item {
+  font-size: 20rpx;
+  color: #666;
+  margin-top: 4rpx;
+}
+.dish-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10rpx;
+}
+.dish-price {
+  font-size: 30rpx;
+  color: #ff5000;
+  font-weight: bold;
+}
+.add-btn {
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 36rpx;
+  font-size: 30rpx;
+}
+
+/* Combo Styles */
+.combo-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+.combo-card {
+  display: inline-block;
+  width: 350rpx;
+  margin-right: 20rpx;
+  background-color: #f8f8f8;
+  border-radius: 12rpx;
+  padding: 16rpx;
+  border: 1rpx solid #eee;
+}
+.combo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+.combo-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+.combo-price {
+  font-size: 28rpx;
+  color: #ff5000;
+  font-weight: bold;
+}
+.combo-desc {
+  font-size: 22rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 64rpx;
+}
+.combo-dishes {
+  display: flex;
+  margin-bottom: 10rpx;
+}
+.combo-dish-image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 8rpx;
+  margin-right: 10rpx;
+}
+.combo-nutrition {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 8rpx;
+  padding: 8rpx;
+  margin-bottom: 10rpx;
+}
+.combo-nutrition-item {
+  font-size: 20rpx;
+  color: #666;
+  margin-bottom: 4rpx;
+}
+.combo-action-btn {
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 24rpx;
+  text-align: center;
+  border-radius: 30rpx;
+  padding: 8rpx 0;
+}
+.nutrition-cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.nutrition-card {
+  width: 48%;
+  height: 160rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.category-image {
+  width: 100%;
+  height: 100%;
+}
+.category-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 8rpx 0;
+  text-align: center;
+  font-size: 28rpx;
+}
+.popular-dishes {
+  margin-top: 10rpx;
+}
+.dish-item {
+  display: flex;
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+.dish-item-image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 8rpx;
+}
+.dish-item-info {
+  flex: 1;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.dish-item-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+.dish-item-desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.dish-item-nutrition {
+  display: flex;
+  flex-direction: column;
+  margin: 8rpx 0;
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  padding: 8rpx;
+}
+.dish-nutrition-item {
+  font-size: 20rpx;
+  color: #666;
+  margin-bottom: 4rpx;
+}
+.dish-item-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dish-item-price {
+  font-size: 32rpx;
+  color: #ff5000;
+  font-weight: bold;
+}
+

@@ -1,0 +1,222 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 120rpx;
+}
+.header {
+  display: flex;
+  align-items: center;
+  height: 90rpx;
+  background-color: #fff;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 0 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.header-left {
+  width: 60rpx;
+}
+.back-icon {
+  font-size: 40rpx;
+  color: #333;
+}
+.header-title {
+  flex: 1;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+.combo-info {
+  background-color: #fff;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+.combo-name {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+.combo-desc {
+  font-size: 28rpx;
+  color: #666;
+}
+.section {
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+.section-header {
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+  padding-left: 16rpx;
+}
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6rpx;
+  height: 28rpx;
+  width: 6rpx;
+  background-color: #4CAF50;
+  border-radius: 3rpx;
+}
+.dish-list {
+  padding: 0 30rpx;
+}
+.dish-item {
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.dish-item:last-child {
+  border-bottom: none;
+}
+.dish-image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+.dish-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.dish-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+.dish-nutrition {
+  display: flex;
+  flex-direction: column;
+  margin: 8rpx 0;
+}
+.nutrition-item {
+  font-size: 22rpx;
+  color: #666;
+  margin-bottom: 4rpx;
+}
+.dish-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+.dish-price {
+  font-size: 30rpx;
+  color: #ff5000;
+  font-weight: bold;
+}
+.add-btn, .remove-btn {
+  width: 100rpx;
+  height: 50rpx;
+  border-radius: 25rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+}
+.add-btn {
+  background-color: #4CAF50;
+  color: #fff;
+}
+.remove-btn {
+  background-color: #ff5000;
+  color: #fff;
+}
+.nutrition-summary {
+  background-color: #fff;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+.summary-header {
+  margin-bottom: 20rpx;
+}
+.summary-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+.nutrition-details {
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  padding: 20rpx;
+}
+.nutrition-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+.nutrition-row:last-child {
+  margin-bottom: 0;
+}
+.nutrition-label {
+  font-size: 26rpx;
+  color: #666;
+}
+.nutrition-value {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: bold;
+}
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.total-price {
+  flex: 1;
+}
+.price-label {
+  font-size: 28rpx;
+  color: #333;
+}
+.price-value {
+  font-size: 36rpx;
+  color: #ff5000;
+  font-weight: bold;
+  margin-left: 10rpx;
+}
+.action-btns {
+  display: flex;
+}
+.reset-btn, .confirm-btn {
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 35rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.reset-btn {
+  width: 150rpx;
+  background-color: #f5f5f5;
+  color: #666;
+  margin-right: 20rpx;
+}
+.confirm-btn {
+  width: 240rpx;
+  background-color: #4CAF50;
+  color: #fff;
+}
+
