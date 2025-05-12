@@ -5,10 +5,12 @@
         <text class="back-icon">←</text>
       </view>
       <view class="header-title">自定义套餐</view>
+      <view class="header-right"></view>
     </view>
     
     <view class="combo-info">
       <text class="combo-name">{{combo.name}}</text>
+      <text class="combo-cafeteria">{{cafeteriaTitle}}</text>
       <text class="combo-desc">{{combo.description}}</text>
     </view>
     
@@ -25,6 +27,8 @@
             <view class="dish-nutrition">
               <text class="nutrition-item">热量: {{dish.calories}}kcal</text>
               <text class="nutrition-item">蛋白质: {{dish.nutrition.protein}}</text>
+              <text class="nutrition-item">碳水: {{dish.nutrition.carbs}}</text>
+              <text class="nutrition-item">脂肪: {{dish.nutrition.fat}}</text>
             </view>
             <view class="dish-bottom">
               <text class="dish-price">¥{{dish.price}}</text>
@@ -35,12 +39,15 @@
       </view>
     </view>
     
-    <!-- Suggested Dishes -->
+    <!-- Suggested Dishes from same cafeteria -->
     <view class="section">
       <view class="section-header">
-        <text class="section-title">推荐添加</text>
+        <text class="section-title">{{cafeteriaTitle}}推荐添加</text>
       </view>
       <view class="dish-list suggested-dishes">
+        <view v-if="suggestedDishes.length === 0" class="no-dishes">
+          <text class="no-dishes-text">当前食堂没有更多可添加的菜品</text>
+        </view>
         <view class="dish-item" v-for="(dish, index) in suggestedDishes" :key="index">
           <image :src="dish.image" mode="aspectFill" class="dish-image"></image>
           <view class="dish-info">
@@ -48,6 +55,11 @@
             <view class="dish-nutrition">
               <text class="nutrition-item">热量: {{dish.calories}}kcal</text>
               <text class="nutrition-item">蛋白质: {{dish.nutrition.protein}}</text>
+              <text class="nutrition-item">碳水: {{dish.nutrition.carbs}}</text>
+              <text class="nutrition-item">脂肪: {{dish.nutrition.fat}}</text>
+            </view>
+            <view class="dish-tags" v-if="dish.tags && dish.tags.length > 0">
+              <text class="tag-item" v-for="(tag, tagIndex) in dish.tags" :key="tagIndex">{{tag}}</text>
             </view>
             <view class="dish-bottom">
               <text class="dish-price">¥{{dish.price}}</text>
@@ -108,10 +120,12 @@ export default {
         dishes: [],
         totalPrice: 0,
         totalCalories: 0,
-        totalNutrition: { protein: '0g', carbs: '0g', fat: '0g' }
+        totalNutrition: { protein: '0g', carbs: '0g', fat: '0g' },
+        cafeteria: '' // 添加食堂标识
       },
       originalCombo: null,
       suggestedDishes: [],
+      cafeteria: '',
       allDishes: [
         { 
           id: 1, 
@@ -119,6 +133,9 @@ export default {
           price: 26, 
           image: '/static/dish1.jpg',
           description: '富含蛋白质和维生素的健康套餐',
+          tags: ['高蛋白', '低脂肪'],
+          cafeteria: ['zhongcan', 'student'],
+          categories: ['recommend', 'protein', 'staple'],
           calories: 450,
           nutrition: { protein: '28g', carbs: '45g', fat: '12g' }
         },
@@ -128,6 +145,9 @@ export default {
           price: 22, 
           image: '/static/dish2.jpg',
           description: '低脂高蛋白，健身人士的首选',
+          tags: ['高蛋白', '低脂肪', '生酮友好'],
+          cafeteria: ['xican'],
+          categories: ['recommend', 'protein', 'lowfat', 'meat'],
           calories: 320,
           nutrition: { protein: '24g', carbs: '18g', fat: '9g' }
         },
@@ -137,6 +157,9 @@ export default {
           price: 28, 
           image: '/static/dish3.jpg',
           description: '地中海风味，富含多种营养素',
+          tags: ['多维生素', '均衡营养'],
+          cafeteria: ['xican'],
+          categories: ['vitamin', 'staple'],
           calories: 480,
           nutrition: { protein: '22g', carbs: '58g', fat: '16g' }
         },
@@ -146,6 +169,9 @@ export default {
           price: 18, 
           image: '/static/dish4.jpg',
           description: '五谷杂粮，营养丰富',
+          tags: ['粗粮', '膳食纤维'],
+          cafeteria: ['zhongcan', 'student', 'qingzhen'],
+          categories: ['vitamin', 'lowfat', 'staple'],
           calories: 390,
           nutrition: { protein: '12g', carbs: '68g', fat: '5g' }
         },
@@ -155,6 +181,9 @@ export default {
           price: 23, 
           image: '/static/dish5.jpg',
           description: '新鲜蔬菜搭配嫩滑鸡胸肉，营养均衡',
+          tags: ['高蛋白', '低热量'],
+          cafeteria: ['xican', 'student'],
+          categories: ['protein', 'lowfat', 'vegetable'],
           calories: 310,
           nutrition: { protein: '26g', carbs: '15g', fat: '10g' }
         },
@@ -164,6 +193,9 @@ export default {
           price: 32, 
           image: '/static/dish6.jpg',
           description: '富含优质脂肪酸和Omega-3',
+          tags: ['OMEGA-3', '健康脂肪'],
+          cafeteria: ['xican'],
+          categories: ['protein', 'vitamin'],
           calories: 520,
           nutrition: { protein: '30g', carbs: '42g', fat: '22g' }
         },
@@ -173,6 +205,9 @@ export default {
           price: 12, 
           image: '/static/dish7.jpg',
           description: '鲜嫩蒸蛋搭配各类营养蔬菜',
+          tags: ['高蛋白', '低脂肪'],
+          cafeteria: ['zhongcan', 'student', 'qingzhen'],
+          categories: ['protein', 'lowfat', 'vegetable'],
           calories: 180,
           nutrition: { protein: '16g', carbs: '8g', fat: '6g' }
         },
@@ -182,16 +217,53 @@ export default {
           price: 15, 
           image: '/static/dish8.jpg',
           description: '多种蔬菜熬制，清淡可口',
+          tags: ['维生素', '低卡路里'],
+          cafeteria: ['zhongcan', 'xican', 'student', 'qingzhen'],
+          categories: ['vitamin', 'lowfat', 'soup', 'vegetable'],
           calories: 120,
           nutrition: { protein: '5g', carbs: '18g', fat: '2g' }
+        },
+        { 
+          id: 9, 
+          name: '清真牛肉拉面', 
+          price: 28, 
+          image: '/static/dish9.jpg',
+          description: '手工拉制面条，搭配清真牛肉',
+          tags: ['高蛋白', '主食'],
+          cafeteria: ['qingzhen'],
+          categories: ['staple', 'meat'],
+          calories: 520,
+          nutrition: { protein: '26g', carbs: '68g', fat: '15g' }
+        },
+        { 
+          id: 10, 
+          name: '羊肉抓饭', 
+          price: 32, 
+          image: '/static/dish10.jpg',
+          description: '新疆风味抓饭，配以鲜嫩羊肉',
+          tags: ['高蛋白', '主食'],
+          cafeteria: ['qingzhen'],
+          categories: ['staple', 'meat'],
+          calories: 580,
+          nutrition: { protein: '28g', carbs: '72g', fat: '18g' }
         }
-      ]
+      ],
+      cafeteriaNames: {
+        'zhongcan': '中餐厅',
+        'xican': '西餐厅',
+        'qingzhen': '清真食堂',
+        'student': '学生食堂'
+      }
     };
+  },
+  computed: {
+    cafeteriaTitle() {
+      return this.cafeteriaNames[this.cafeteria] || '';
+    }
   },
   onLoad(options) {
     const comboId = options.comboId;
     this.loadCombo(comboId);
-    this.updateSuggestedDishes();
   },
   methods: {
     loadCombo(comboId) {
@@ -201,94 +273,37 @@ export default {
         if (comboData) {
           this.combo = JSON.parse(JSON.stringify(comboData)); // 深拷贝
           this.originalCombo = JSON.parse(JSON.stringify(comboData)); // 保存原始套餐，用于重置
-        } else {
-          // 如果没有缓存数据，可以根据ID从预定义的套餐中获取
-          const mealCombos = [
-            {
-              id: 1,
-              name: "增肌套餐",
-              description: "高蛋白、适量碳水，适合健身增肌人群",
-              dishes: [
-                { 
-                  id: 1, 
-                  name: '营养三色鸡肉饭', 
-                  price: 26, 
-                  image: '/static/dish1.jpg',
-                  calories: 450,
-                  nutrition: { protein: '28g', carbs: '45g', fat: '12g' }
-                },
-                { 
-                  id: 7, 
-                  name: '蔬菜蒸蛋', 
-                  price: 12, 
-                  image: '/static/dish7.jpg',
-                  calories: 180,
-                  nutrition: { protein: '16g', carbs: '8g', fat: '6g' }
-                }
-              ],
-              totalPrice: 38,
-              totalCalories: 630,
-              totalNutrition: { protein: '44g', carbs: '53g', fat: '18g' }
-            },
-            {
-              id: 2,
-              name: "减脂套餐",
-              description: "低脂低碳水，富含蛋白质，适合减脂人群",
-              dishes: [
-                { 
-                  id: 2, 
-                  name: '低脂牛肉沙拉', 
-                  price: 22, 
-                  image: '/static/dish2.jpg',
-                  calories: 320,
-                  nutrition: { protein: '24g', carbs: '18g', fat: '9g' }
-                },
-                { 
-                  id: 8, 
-                  name: '健康蔬菜汤', 
-                  price: 15, 
-                  image: '/static/dish8.jpg',
-                  calories: 120,
-                  nutrition: { protein: '5g', carbs: '18g', fat: '2g' }
-                }
-              ],
-              totalPrice: 37,
-              totalCalories: 440,
-              totalNutrition: { protein: '29g', carbs: '36g', fat: '11g' }
-            },
-            {
-              id: 3,
-              name: "均衡营养套餐",
-              description: "全面均衡的营养搭配，适合大众人群",
-              dishes: [
-                { 
-                  id: 3, 
-                  name: '地中海风情饭', 
-                  price: 28, 
-                  image: '/static/dish3.jpg',
-                  calories: 480,
-                  nutrition: { protein: '22g', carbs: '58g', fat: '16g' }
-                },
-                { 
-                  id: 5, 
-                  name: '鲜蔬鸡胸肉沙拉', 
-                  price: 23, 
-                  image: '/static/dish5.jpg',
-                  calories: 310,
-                  nutrition: { protein: '26g', carbs: '15g', fat: '10g' }
-                }
-              ],
-              totalPrice: 51,
-              totalCalories: 790,
-              totalNutrition: { protein: '48g', carbs: '73g', fat: '26g' }
-            }
-          ];
           
-          const found = mealCombos.find(c => c.id === parseInt(comboId));
-          if (found) {
-            this.combo = JSON.parse(JSON.stringify(found));
-            this.originalCombo = JSON.parse(JSON.stringify(found));
+          // 提取套餐所属的食堂
+          if (comboData.cafeteria) {
+            this.cafeteria = comboData.cafeteria;
+          } else {
+            // 尝试从ID推断所属食堂
+            if (comboId <= 2) {
+              this.cafeteria = 'zhongcan';
+            } else if (comboId <= 4) {
+              this.cafeteria = 'xican';
+            } else if (comboId === 5) {
+              this.cafeteria = 'qingzhen';
+            } else {
+              this.cafeteria = 'student';
+            }
+            this.combo.cafeteria = this.cafeteria;
           }
+          
+          this.updateSuggestedDishes();
+        } else {
+          // 如果没有缓存数据，可能是直接进入页面，显示错误提示
+          uni.showToast({
+            title: '未能找到套餐数据',
+            icon: 'none',
+            duration: 2000,
+            complete: () => {
+              setTimeout(() => {
+                uni.navigateBack();
+              }, 2000);
+            }
+          });
         }
       } catch (e) {
         console.error('Error loading combo data:', e);
@@ -303,9 +318,10 @@ export default {
       // 获取当前套餐中的菜品ID
       const currentDishIds = this.combo.dishes.map(dish => dish.id);
       
-      // 根据当前套餐的类型，筛选推荐的菜品
-      // 这里简单地推荐所有不在当前套餐中的菜品
-      this.suggestedDishes = this.allDishes.filter(dish => !currentDishIds.includes(dish.id));
+      // 根据当前套餐的食堂，筛选可以添加的菜品
+      this.suggestedDishes = this.allDishes.filter(dish => 
+        dish.cafeteria.includes(this.cafeteria) && !currentDishIds.includes(dish.id)
+      );
     },
     
     removeDish(index) {
@@ -472,6 +488,10 @@ export default {
   width: 60rpx;
 }
 
+.header-right {
+  width: 60rpx;
+}
+
 .back-icon {
   font-size: 40rpx;
   color: #333;
@@ -496,6 +516,16 @@ export default {
   font-weight: bold;
   color: #333;
   margin-bottom: 10rpx;
+}
+
+.combo-cafeteria {
+  font-size: 26rpx;
+  color: #4CAF50;
+  background-color: rgba(76, 175, 80, 0.1);
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+  margin-bottom: 16rpx;
 }
 
 .combo-desc {
@@ -568,14 +598,34 @@ export default {
 
 .dish-nutrition {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   margin: 8rpx 0;
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  padding: 8rpx;
 }
 
 .nutrition-item {
   font-size: 22rpx;
   color: #666;
+  margin-right: 16rpx;
   margin-bottom: 4rpx;
+}
+
+.dish-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 8rpx 0;
+}
+
+.tag-item {
+  font-size: 20rpx;
+  color: #4CAF50;
+  background-color: rgba(76, 175, 80, 0.1);
+  padding: 4rpx 10rpx;
+  border-radius: 20rpx;
+  margin-right: 10rpx;
+  margin-bottom: 6rpx;
 }
 
 .dish-bottom {
@@ -609,6 +659,17 @@ export default {
 .remove-btn {
   background-color: #ff5000;
   color: #fff;
+}
+
+.no-dishes {
+  display: flex;
+  justify-content: center;
+  padding: 40rpx 0;
+}
+
+.no-dishes-text {
+  font-size: 28rpx;
+  color: #999;
 }
 
 .nutrition-summary {

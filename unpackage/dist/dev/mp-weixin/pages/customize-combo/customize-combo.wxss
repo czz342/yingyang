@@ -21,6 +21,9 @@
 .header-left {
   width: 60rpx;
 }
+.header-right {
+  width: 60rpx;
+}
 .back-icon {
   font-size: 40rpx;
   color: #333;
@@ -42,6 +45,15 @@
   font-weight: bold;
   color: #333;
   margin-bottom: 10rpx;
+}
+.combo-cafeteria {
+  font-size: 26rpx;
+  color: #4CAF50;
+  background-color: rgba(76, 175, 80, 0.1);
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+  margin-bottom: 16rpx;
 }
 .combo-desc {
   font-size: 28rpx;
@@ -102,13 +114,31 @@
 }
 .dish-nutrition {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   margin: 8rpx 0;
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  padding: 8rpx;
 }
 .nutrition-item {
   font-size: 22rpx;
   color: #666;
+  margin-right: 16rpx;
   margin-bottom: 4rpx;
+}
+.dish-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 8rpx 0;
+}
+.tag-item {
+  font-size: 20rpx;
+  color: #4CAF50;
+  background-color: rgba(76, 175, 80, 0.1);
+  padding: 4rpx 10rpx;
+  border-radius: 20rpx;
+  margin-right: 10rpx;
+  margin-bottom: 6rpx;
 }
 .dish-bottom {
   display: flex;
@@ -137,6 +167,15 @@
 .remove-btn {
   background-color: #ff5000;
   color: #fff;
+}
+.no-dishes {
+  display: flex;
+  justify-content: center;
+  padding: 40rpx 0;
+}
+.no-dishes-text {
+  font-size: 28rpx;
+  color: #999;
 }
 .nutrition-summary {
   background-color: #fff;

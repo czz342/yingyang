@@ -28,7 +28,7 @@
       },
       {
         "pagePath": "pages/menu/menu",
-        "text": "菜品",
+        "text": "食堂",
         "iconPath": "static/tab-icons/menu.png",
         "selectedIconPath": "static/tab-icons/menu-active.png"
       },

@@ -284,34 +284,34 @@ export default {
     // 添加到购物车
     addToCart() {
       try {
-        // 获取购物车
-        let cart = uni.getStorageSync('cart') || [];
-        
-        // 检查菜品是否已在购物车中
-        const index = cart.findIndex(item => item.id === this.dish.id);
-        
-        if (index > -1) {
-          // 已存在，数量+1
-          cart[index].quantity += 1;
-        } else {
-          // 不存在，添加到购物车
-          cart.push({
-            ...this.dish,
-            quantity: 1
-          });
-        }
-        
-        // 保存购物车
-        uni.setStorageSync('cart', cart);
-        
-        // 更新购物车数量
-        this.updateCartCount();
-        
+      // 获取购物车
+      let cart = uni.getStorageSync('cart') || [];
+      
+      // 检查菜品是否已在购物车中
+      const index = cart.findIndex(item => item.id === this.dish.id);
+      
+      if (index > -1) {
+        // 已存在，数量+1
+        cart[index].quantity += 1;
+      } else {
+        // 不存在，添加到购物车
+        cart.push({
+          ...this.dish,
+          quantity: 1
+        });
+      }
+      
+      // 保存购物车
+      uni.setStorageSync('cart', cart);
+      
+      // 更新购物车数量
+      this.updateCartCount();
+      
         // 提示用户 - 避免使用需要认证的 API
         try {
           // 先尝试使用showToast
-          uni.showToast({
-            title: '已加入购物车',
+      uni.showToast({
+        title: '已加入购物车',
             icon: 'success',
             mask: false,
             fail: (err) => {

@@ -102,7 +102,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var g0 = _vm.filteredDishes.length
+  var g0 = _vm.filteredDishes.length === 0 && !_vm.showCafeteriaRecommendations
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -165,8 +165,25 @@ var _default = {
   },
   data: function data() {
     return {
+      currentCafeteria: 'all',
+      cafeterias: [{
+        id: 'all',
+        name: '全部食堂'
+      }, {
+        id: 'zhongcan',
+        name: '中餐厅'
+      }, {
+        id: 'xican',
+        name: '西餐厅'
+      }, {
+        id: 'qingzhen',
+        name: '清真食堂'
+      }, {
+        id: 'student',
+        name: '学生食堂'
+      }],
       currentCategory: 'all',
-      categories: [{
+      nutritionCategories: [{
         id: 'all',
         name: '全部'
       }, {
@@ -197,14 +214,15 @@ var _default = {
         id: 'soup',
         name: '汤品'
       }],
+      showCafeteriaRecommendations: false,
       dishes: [{
         id: 1,
         name: '营养三色鸡肉饭',
         price: 26,
         image: '/static/dish1.jpg',
         description: '富含蛋白质和维生素的健康套餐',
-        sales: 328,
         tags: ['高蛋白', '低脂肪'],
+        cafeteria: ['zhongcan', 'student'],
         categories: ['recommend', 'protein', 'staple'],
         calories: 450,
         nutrition: {
@@ -219,8 +237,8 @@ var _default = {
         originalPrice: 25,
         image: '/static/dish2.jpg',
         description: '低脂高蛋白，健身人士的首选',
-        sales: 216,
         tags: ['高蛋白', '低脂肪', '生酮友好'],
+        cafeteria: ['xican'],
         categories: ['recommend', 'protein', 'lowfat', 'meat'],
         calories: 320,
         nutrition: {
@@ -234,8 +252,8 @@ var _default = {
         price: 28,
         image: '/static/dish3.jpg',
         description: '地中海风味，富含多种营养素',
-        sales: 198,
         tags: ['多维生素', '均衡营养'],
+        cafeteria: ['xican'],
         categories: ['vitamin', 'staple'],
         calories: 480,
         nutrition: {
@@ -249,8 +267,8 @@ var _default = {
         price: 18,
         image: '/static/dish4.jpg',
         description: '五谷杂粮，营养丰富',
-        sales: 156,
         tags: ['粗粮', '膳食纤维'],
+        cafeteria: ['zhongcan', 'student', 'qingzhen'],
         categories: ['vitamin', 'lowfat', 'staple'],
         calories: 390,
         nutrition: {
@@ -264,8 +282,8 @@ var _default = {
         price: 23,
         image: '/static/dish5.jpg',
         description: '新鲜蔬菜搭配嫩滑鸡胸肉，营养均衡',
-        sales: 186,
         tags: ['高蛋白', '低热量'],
+        cafeteria: ['xican', 'student'],
         categories: ['protein', 'lowfat', 'vegetable'],
         calories: 310,
         nutrition: {
@@ -279,8 +297,8 @@ var _default = {
         price: 32,
         image: '/static/dish6.jpg',
         description: '富含优质脂肪酸和Omega-3',
-        sales: 142,
         tags: ['OMEGA-3', '健康脂肪'],
+        cafeteria: ['xican'],
         categories: ['protein', 'vitamin'],
         calories: 520,
         nutrition: {
@@ -294,8 +312,8 @@ var _default = {
         price: 12,
         image: '/static/dish7.jpg',
         description: '鲜嫩蒸蛋搭配各类营养蔬菜',
-        sales: 210,
         tags: ['高蛋白', '低脂肪'],
+        cafeteria: ['zhongcan', 'student', 'qingzhen'],
         categories: ['protein', 'lowfat', 'vegetable'],
         calories: 180,
         nutrition: {
@@ -309,8 +327,8 @@ var _default = {
         price: 15,
         image: '/static/dish8.jpg',
         description: '多种蔬菜熬制，清淡可口',
-        sales: 168,
         tags: ['维生素', '低卡路里'],
+        cafeteria: ['zhongcan', 'xican', 'student', 'qingzhen'],
         categories: ['vitamin', 'lowfat', 'soup', 'vegetable'],
         calories: 120,
         nutrition: {
@@ -318,122 +336,317 @@ var _default = {
           carbs: '18g',
           fat: '2g'
         }
+      }, {
+        id: 9,
+        name: '清真牛肉拉面',
+        price: 28,
+        image: '/static/dish9.jpg',
+        description: '手工拉制面条，搭配清真牛肉',
+        tags: ['高蛋白', '主食'],
+        cafeteria: ['qingzhen'],
+        categories: ['staple', 'meat'],
+        calories: 520,
+        nutrition: {
+          protein: '26g',
+          carbs: '68g',
+          fat: '15g'
+        }
+      }, {
+        id: 10,
+        name: '羊肉抓饭',
+        price: 32,
+        image: '/static/dish10.jpg',
+        description: '新疆风味抓饭，配以鲜嫩羊肉',
+        tags: ['高蛋白', '主食'],
+        cafeteria: ['qingzhen'],
+        categories: ['staple', 'meat'],
+        calories: 580,
+        nutrition: {
+          protein: '28g',
+          carbs: '72g',
+          fat: '18g'
+        }
       }],
-      mealCombos: [{
-        id: 1,
-        name: "增肌套餐",
-        description: "高蛋白、适量碳水，适合健身增肌人群",
-        dishes: [{
+      cafeteriaCombos: {
+        zhongcan: [{
           id: 1,
-          name: '营养三色鸡肉饭',
-          price: 26,
-          image: '/static/dish1.jpg',
-          calories: 450,
-          nutrition: {
+          name: "中餐厅增肌套餐",
+          description: "高蛋白、适量碳水，适合健身增肌人群",
+          dishes: [{
+            id: 1,
+            name: '营养三色鸡肉饭',
+            price: 26,
+            image: '/static/dish1.jpg',
+            calories: 450,
+            nutrition: {
+              protein: '28g',
+              carbs: '45g',
+              fat: '12g'
+            }
+          }, {
+            id: 7,
+            name: '蔬菜蒸蛋',
+            price: 12,
+            image: '/static/dish7.jpg',
+            calories: 180,
+            nutrition: {
+              protein: '16g',
+              carbs: '8g',
+              fat: '6g'
+            }
+          }],
+          totalPrice: 38,
+          totalCalories: 630,
+          totalNutrition: {
+            protein: '44g',
+            carbs: '53g',
+            fat: '18g'
+          }
+        }, {
+          id: 2,
+          name: "中餐厅营养均衡套餐",
+          description: "荤素搭配，营养均衡",
+          dishes: [{
+            id: 4,
+            name: '五谷杂粮煲',
+            price: 18,
+            image: '/static/dish4.jpg',
+            calories: 390,
+            nutrition: {
+              protein: '12g',
+              carbs: '68g',
+              fat: '5g'
+            }
+          }, {
+            id: 8,
+            name: '健康蔬菜汤',
+            price: 15,
+            image: '/static/dish8.jpg',
+            calories: 120,
+            nutrition: {
+              protein: '5g',
+              carbs: '18g',
+              fat: '2g'
+            }
+          }],
+          totalPrice: 33,
+          totalCalories: 510,
+          totalNutrition: {
+            protein: '17g',
+            carbs: '86g',
+            fat: '7g'
+          }
+        }],
+        xican: [{
+          id: 3,
+          name: "西餐厅减脂套餐",
+          description: "低脂低碳水，富含蛋白质，适合减脂人群",
+          dishes: [{
+            id: 2,
+            name: '低脂牛肉沙拉',
+            price: 22,
+            image: '/static/dish2.jpg',
+            calories: 320,
+            nutrition: {
+              protein: '24g',
+              carbs: '18g',
+              fat: '9g'
+            }
+          }, {
+            id: 8,
+            name: '健康蔬菜汤',
+            price: 15,
+            image: '/static/dish8.jpg',
+            calories: 120,
+            nutrition: {
+              protein: '5g',
+              carbs: '18g',
+              fat: '2g'
+            }
+          }],
+          totalPrice: 37,
+          totalCalories: 440,
+          totalNutrition: {
+            protein: '29g',
+            carbs: '36g',
+            fat: '11g'
+          }
+        }, {
+          id: 4,
+          name: "西餐厅海鲜套餐",
+          description: "富含海洋蛋白质和Omega-3",
+          dishes: [{
+            id: 6,
+            name: '牛油果三文鱼饭',
+            price: 32,
+            image: '/static/dish6.jpg',
+            calories: 520,
+            nutrition: {
+              protein: '30g',
+              carbs: '42g',
+              fat: '22g'
+            }
+          }, {
+            id: 5,
+            name: '鲜蔬鸡胸肉沙拉',
+            price: 23,
+            image: '/static/dish5.jpg',
+            calories: 310,
+            nutrition: {
+              protein: '26g',
+              carbs: '15g',
+              fat: '10g'
+            }
+          }],
+          totalPrice: 55,
+          totalCalories: 830,
+          totalNutrition: {
+            protein: '56g',
+            carbs: '57g',
+            fat: '32g'
+          }
+        }],
+        qingzhen: [{
+          id: 5,
+          name: "清真食堂经典套餐",
+          description: "传统清真美食，营养丰富",
+          dishes: [{
+            id: 9,
+            name: '清真牛肉拉面',
+            price: 28,
+            image: '/static/dish9.jpg',
+            calories: 520,
+            nutrition: {
+              protein: '26g',
+              carbs: '68g',
+              fat: '15g'
+            }
+          }, {
+            id: 8,
+            name: '健康蔬菜汤',
+            price: 15,
+            image: '/static/dish8.jpg',
+            calories: 120,
+            nutrition: {
+              protein: '5g',
+              carbs: '18g',
+              fat: '2g'
+            }
+          }],
+          totalPrice: 43,
+          totalCalories: 640,
+          totalNutrition: {
+            protein: '31g',
+            carbs: '86g',
+            fat: '17g'
+          }
+        }],
+        student: [{
+          id: 6,
+          name: "学生食堂经济套餐",
+          description: "价格实惠，营养均衡",
+          dishes: [{
+            id: 4,
+            name: '五谷杂粮煲',
+            price: 18,
+            image: '/static/dish4.jpg',
+            calories: 390,
+            nutrition: {
+              protein: '12g',
+              carbs: '68g',
+              fat: '5g'
+            }
+          }, {
+            id: 7,
+            name: '蔬菜蒸蛋',
+            price: 12,
+            image: '/static/dish7.jpg',
+            calories: 180,
+            nutrition: {
+              protein: '16g',
+              carbs: '8g',
+              fat: '6g'
+            }
+          }],
+          totalPrice: 30,
+          totalCalories: 570,
+          totalNutrition: {
             protein: '28g',
-            carbs: '45g',
-            fat: '12g'
+            carbs: '76g',
+            fat: '11g'
           }
         }, {
           id: 7,
-          name: '蔬菜蒸蛋',
-          price: 12,
-          image: '/static/dish7.jpg',
-          calories: 180,
-          nutrition: {
-            protein: '16g',
-            carbs: '8g',
-            fat: '6g'
+          name: "学生食堂能量套餐",
+          description: "高能量，适合运动后恢复",
+          dishes: [{
+            id: 1,
+            name: '营养三色鸡肉饭',
+            price: 26,
+            image: '/static/dish1.jpg',
+            calories: 450,
+            nutrition: {
+              protein: '28g',
+              carbs: '45g',
+              fat: '12g'
+            }
+          }, {
+            id: 5,
+            name: '鲜蔬鸡胸肉沙拉',
+            price: 23,
+            image: '/static/dish5.jpg',
+            calories: 310,
+            nutrition: {
+              protein: '26g',
+              carbs: '15g',
+              fat: '10g'
+            }
+          }],
+          totalPrice: 49,
+          totalCalories: 760,
+          totalNutrition: {
+            protein: '54g',
+            carbs: '60g',
+            fat: '22g'
           }
-        }],
-        totalPrice: 38,
-        totalCalories: 630,
-        totalNutrition: {
-          protein: '44g',
-          carbs: '53g',
-          fat: '18g'
-        }
-      }, {
-        id: 2,
-        name: "减脂套餐",
-        description: "低脂低碳水，富含蛋白质，适合减脂人群",
-        dishes: [{
-          id: 2,
-          name: '低脂牛肉沙拉',
-          price: 22,
-          image: '/static/dish2.jpg',
-          calories: 320,
-          nutrition: {
-            protein: '24g',
-            carbs: '18g',
-            fat: '9g'
-          }
-        }, {
-          id: 8,
-          name: '健康蔬菜汤',
-          price: 15,
-          image: '/static/dish8.jpg',
-          calories: 120,
-          nutrition: {
-            protein: '5g',
-            carbs: '18g',
-            fat: '2g'
-          }
-        }],
-        totalPrice: 37,
-        totalCalories: 440,
-        totalNutrition: {
-          protein: '29g',
-          carbs: '36g',
-          fat: '11g'
-        }
-      }, {
-        id: 3,
-        name: "均衡营养套餐",
-        description: "全面均衡的营养搭配，适合大众人群",
-        dishes: [{
-          id: 3,
-          name: '地中海风情饭',
-          price: 28,
-          image: '/static/dish3.jpg',
-          calories: 480,
-          nutrition: {
-            protein: '22g',
-            carbs: '58g',
-            fat: '16g'
-          }
-        }, {
-          id: 5,
-          name: '鲜蔬鸡胸肉沙拉',
-          price: 23,
-          image: '/static/dish5.jpg',
-          calories: 310,
-          nutrition: {
-            protein: '26g',
-            carbs: '15g',
-            fat: '10g'
-          }
-        }],
-        totalPrice: 51,
-        totalCalories: 790,
-        totalNutrition: {
-          protein: '48g',
-          carbs: '73g',
-          fat: '26g'
-        }
-      }]
+        }]
+      }
     };
   },
   computed: {
-    filteredDishes: function filteredDishes() {
+    currentCafeteriaName: function currentCafeteriaName() {
       var _this = this;
-      if (this.currentCategory === 'all') {
-        return this.dishes;
-      } else {
-        return this.dishes.filter(function (dish) {
-          return dish.categories.includes(_this.currentCategory);
+      var cafeteria = this.cafeterias.find(function (c) {
+        return c.id === _this.currentCafeteria;
+      });
+      return cafeteria ? cafeteria.name : '';
+    },
+    filteredDishes: function filteredDishes() {
+      var _this2 = this;
+      // 先按食堂筛选
+      var result = this.dishes;
+      if (this.currentCafeteria !== 'all') {
+        result = this.dishes.filter(function (dish) {
+          return dish.cafeteria.includes(_this2.currentCafeteria);
         });
       }
+
+      // 再按营养类别筛选
+      if (this.currentCategory !== 'all') {
+        result = result.filter(function (dish) {
+          return dish.categories.includes(_this2.currentCategory);
+        });
+      }
+      return result;
+    },
+    filteredCombos: function filteredCombos() {
+      // 当选择"全部"时，返回所有套餐
+      if (this.currentCafeteria === 'all') {
+        return Object.values(this.cafeteriaCombos).flat();
+      }
+
+      // 返回当前食堂的套餐
+      return this.cafeteriaCombos[this.currentCafeteria] || [];
     }
   },
   onLoad: function onLoad(options) {
@@ -441,8 +654,19 @@ var _default = {
     if (options && options.category) {
       this.currentCategory = options.category;
     }
+
+    // 如果从其他页面传入了食堂参数，则切换到该食堂
+    if (options && options.cafeteria) {
+      this.changeCafeteria(options.cafeteria);
+    }
   },
   methods: {
+    changeCafeteria: function changeCafeteria(cafeteriaId) {
+      this.currentCafeteria = cafeteriaId;
+
+      // 当切换到非"全部"的食堂时，显示套餐推荐
+      this.showCafeteriaRecommendations = cafeteriaId !== 'all';
+    },
     changeCategory: function changeCategory(categoryId) {
       this.currentCategory = categoryId;
     },
